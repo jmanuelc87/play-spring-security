@@ -3,6 +3,7 @@ package org.oaksoft.app.controllers;
 
 import org.oaksoft.security.web.access.Secured;
 import org.oaksoft.security.web.authentication.Login;
+import org.oaksoft.security.web.authentication.logout.Logout;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -18,6 +19,12 @@ public class Application extends Controller
     public Result login()
     {
         return ok(org.oaksoft.app.views.html.login.index.render());
+    }
+
+    @Logout
+    public Result logout()
+    {
+        return ok();
     }
 
     @Login(successRedirect = "/home", failureRedirect = "/")

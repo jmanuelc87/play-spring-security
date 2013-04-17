@@ -25,7 +25,7 @@ public class PlayFilterChain extends GenericPlayFilterBean
 
     private Map<String, List<ChainFilter>> filtersMap = new HashMap<String, List<ChainFilter>>();
 
-    private String[] filtersOrder = {"SECURITY_CONTEXT_FILTER", "FORM_LOGIN_FILTER", "FILTER_SECURITY_INTERCEPTOR"};
+    private String[] filtersOrder = {"SECURITY_CONTEXT_FILTER", "LOGOUT_FILTER", "FORM_LOGIN_FILTER", "FILTER_SECURITY_INTERCEPTOR"};
 
     @Override
     public void onStart()

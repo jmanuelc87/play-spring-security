@@ -4,7 +4,7 @@ import play.Project._
 
 object ApplicationBuild extends Build {
 
-  val appName         = "test-spring-secure"
+  val appName         = "play-spring-secure-project"
   val appVersion      = "1.0-SNAPSHOT"
 
   val mainSecurePlayDependencies = Seq(

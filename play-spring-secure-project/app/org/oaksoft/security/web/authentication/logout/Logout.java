@@ -1,7 +1,4 @@
-package org.oaksoft.security.web.authentication;
-
-import play.mvc.Call;
-import play.mvc.Result;
+package org.oaksoft.security.web.authentication.logout;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,9 +11,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Login
+public @interface Logout
 {
-    public String successRedirect() default "";
-
-    public String failureRedirect() default "/";
+    public String successRedirect() default "/";
 }

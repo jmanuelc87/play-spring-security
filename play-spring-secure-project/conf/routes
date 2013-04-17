@@ -7,6 +7,8 @@ GET     /                                   @org.oaksoft.app.controllers.Applica
 
 GET     /login                              @org.oaksoft.app.controllers.Application.login()
 
+GET     /logout                             @org.oaksoft.app.controllers.Application.logout()
+
 POST    /submit/login                       @org.oaksoft.app.controllers.Application.loginSubmit()
 
 GET     /home                               @org.oaksoft.app.controllers.Application.home()
