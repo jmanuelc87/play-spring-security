@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+    <context:component-scan base-package="org.oaksoft"/>
+
+    <context:annotation-config></context:annotation-config>
+
+
+    <bean id="filter" class="org.oaksoft.security.web.PlayFilterChain">
+        <property name="filtersMap">
+            <map>
+                <entry key="SECURITY_CONTEXT_FILTER">
+                    <list>
+                        <ref bean="first-filter"/>
+                    </list>
+                </entry>
+                <entry key="FORM_LOGIN_FILTER">
+                    <list>
+                        <ref bean="second-filter"/>
+                    </list>
+                </entry>
+                <entry key="FILTER_SECURITY_INTERCEPTOR">
+                    <list>
+                        <ref bean="third-filter" />
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="first-filter" class="org.oaksoft.security.web.context.PlaySecurityContextPersistenceFilter">
+        <property name="playSecurityContextRepository" ref="play-repo"/>
+    </bean>
+
+    <bean id="second-filter" class="org.oaksoft.security.web.authentication.UsernamePasswordPlayAuthenticationFilter">
+        <property name="authenticationManager" ref="auth-manager"/>
+    </bean>
+
+    <bean id="third-filter" class="org.oaksoft.security.web.access.PlayFilterSecurityInterceptor">
+        <property name="securityMetadataSource" ref="meta-soruce" />
+        <property name="authenticationManager" ref="auth-manager" />
+        <property name="accessDecisionManager" ref="desicionManager" />
+    </bean>
+
+    <bean id="play-repo" class="org.oaksoft.security.web.context.PlayHttpSessionSecurityContextRepository"></bean>
+
+    <bean id="auth-manager" class="org.oaksoft.app.security.DummyAuthenticationManager"></bean>
+
+    <bean id="meta-soruce" class="org.oaksoft.security.web.access.PlaySecurityMetadataSource"></bean>
+
+    <bean id="desicionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <constructor-arg name="decisionVoters">
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter" />
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
